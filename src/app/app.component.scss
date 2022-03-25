@@ -1,0 +1,14 @@
+.container {
+    width: 40vw;
+    height: 40vw;
+    border: 1px solid tomato;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+}
+
+input {
+    margin-bottom: 30px;
+}
