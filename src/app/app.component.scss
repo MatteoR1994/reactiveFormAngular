@@ -1,7 +1,45 @@
 .container {
-    width: 40vw;
-    height: 40vw;
-    border: 1px solid tomato;
+    height: 80vh;
+    width: 90vw;
+    margin: 25px 0px 0px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    // border: 1px solid tomato;
+}
+
+
+.form-container {
+    width: 40vW;
+    border-radius: 8px;
+    box-shadow: 1px 1px 20px 3px rgba(49,49,49,0.75);
+    -webkit-box-shadow: 1px 1px 20px 3px rgba(49,49,49,0.75);
+    -moz-box-shadow: 1px 1px 20px 3px rgba(49,49,49,0.75);
+    // border: 1px solid green;
+}
+
+.recap-info-container {
+    width: 40vW;
+    height: 95%;
+    display: flex;
+    flex-direction: column;
+    // border: 1px solid orange;
+}
+
+.form-data-text {
+    margin: 15px 0px 15px 15px;
+}
+
+.form-title {
+    margin-bottom: 5px;
+}
+
+.form-subtitle {
+    color: tomato;
+}
+
+.title-bottom-padding {
+    margin-bottom: 20px;
 }
 
 .form {
@@ -9,6 +47,35 @@
     flex-direction: column;
 }
 
-input {
-    margin-bottom: 30px;
+.row-fields-container {
+    width: 100%;
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    padding: 10px 0px 10px 0px;
+}
+
+.field-container {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center;
+}
+
+.mail-field-container {
+    width: 100%;
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+}
+
+.mail-field-container .mat-form-field {
+    width: 95% !important;
+}
+
+.submitButton {
+    width: 35%;
+    height: 50px;
+    cursor: pointer;
 }

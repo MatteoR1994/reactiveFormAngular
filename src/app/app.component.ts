@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -8,27 +8,35 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
 })
 export class AppComponent {
 
-  submitted = false;
+  public formData?: any;
 
-  title = 'reactiveFormAngular';
+  // public formData = {
+  //   username: 'StephenKing2022',
+  //   password: 'ciaomondocomeva',
+  //   name: 'Matteo',
+  //   surname: 'Rinaldi',
+  //   email: 'grifo94@email.it',
+  //   phone: '3496245067',
+  //   gender: 'male'
+  // };
 
-  profileForm = this.fb.group({
-    profileUsername: [null, Validators.required],
-    profilePassword: ['', Validators.minLength(8)],
-    profileName: ['', Validators.required],
-    profileSurname: ['', Validators.required],
-    profileMail: ['', Validators.required],
-    profilePhone: [''],
-    profileGender: ['', Validators.required]
+  public form = new FormGroup({
+    username: new FormControl('', [Validators.required]),
+    password: new FormControl('', [Validators.required, Validators.minLength(8)]),
+    name: new FormControl('', Validators.required),
+    surname: new FormControl('', [Validators.required]),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    phone: new FormControl(''),
+    gender: new FormControl('', [Validators.required, Validators.minLength(1)])
   });
 
-  constructor(private fb: FormBuilder) {}
-
-  get f() { return this.profileForm.controls; }
-
-  onSubmit() {
-    this.submitted = true;
-    console.log(this.profileForm.value['profileName'])
+  get f(){
+    return this.form.controls;
   }
-
+  
+  submit(){
+    console.log(this.form.value);
+    this.formData = this.form.value;
+  }
+  
 }

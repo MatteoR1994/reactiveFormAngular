@@ -1,34 +1,111 @@
 <div class="container">
-  <form class="form" [formGroup]="profileForm"  (ngSubmit)="onSubmit()">
 
-    <label for="profUsername">USERNAME: *</label>
-    <input id="profUsername" type="text" formControlName="profileUsername" required minlength="4">
-    <div *ngIf="(profileForm.value['profileUsername'] || submitted) && profileForm.value['profileUsername'].errors?.required" class="invalid-feedback">Accept Ts & Cs is required</div>
+  <div class="form-container">
+    <div class="row-fields-container form title-bottom-padding">
+      <h2 class="form-title">Compila il form con i tuoi dati</h2>
+      <h5 class="form-subtitle">tutti i campi con * sono obbligatori</h5>
+    </div>
   
-    <label for="profile-password">PASSWORD: *</label>
-    <input id="profile-password" type="text" formControlName="profilePassword" required minlength="8">
-
-    <label for="profile-name">NOME: *</label>
-    <input id="profile-name" type="text" formControlName="profileName" required>
-
-    <label for="profile-surname">COGNOME: *</label>
-    <input id="profile-surname" type="text" formControlName="profileSurname" required>
-
-    <label for="profile-mail">MAIL: *</label>
-    <input id="profile-mail" type="text" formControlName="profileMail" required>
-
-    <label for="profile-phone">TELEFONO: </label>
-    <input id="profile-phone" type="text" formControlName="profilePhone">
-
-    <label for="profile-gender">SESSO: *</label>
-    <input id="profile-gender" type="text" formControlName="profileGender" required>
-
-    <p>* = Campi obbligatori.</p>
-    <button type="submit" [disabled]="!profileForm.valid">Submit</button>
+    <form class="form" [formGroup]="form" (ngSubmit)="submit()">
+      <div class="row-fields-container">
+        <div class="field-container">
+          <mat-form-field appearance="fill">
+            <mat-label>Username</mat-label>
+            <input matInput formControlName="username" id="username" type="text">
+          </mat-form-field>
+          <div *ngIf="f['username'].touched && f['username'].invalid">
+            <mat-error *ngIf="f['username'].errors && f['username'].errors['required']">Name is required.</mat-error>
+          </div>
+        </div>
+        <div class="field-container">
+          <mat-form-field appearance="fill">
+            <mat-label>Password</mat-label>
+            <input matInput formControlName="password" id="password" type="password">
+          </mat-form-field>
+          <div *ngIf="f['password'].touched && f['password'].invalid">
+            <mat-error *ngIf="f['password'].errors && f['password'].errors['required']">Password is required.</mat-error>
+            <mat-error *ngIf="f['password'].errors && f['password'].errors['minlength']">Password should be 8 character min.
+            </mat-error>
+          </div>
+        </div>
+      </div>
   
-  </form>
+      <div class="row-fields-container">
+        <div class="field-container">
+          <mat-form-field appearance="fill">
+            <mat-label>Name</mat-label>
+            <input matInput formControlName="name" id="name" type="text">
+          </mat-form-field>
+          <div *ngIf="f['name'].touched && f['name'].invalid">
+            <mat-error *ngIf="f['name'].errors && f['name'].errors['required']">Name is required.</mat-error>
+          </div>
+        </div>
+        <div class="field-container">
+          <mat-form-field appearance="fill">
+            <mat-label>Surname</mat-label>
+            <input matInput formControlName="surname" id="surname" type="text">
+          </mat-form-field>
+          <div *ngIf="f['surname'].touched && f['surname'].invalid">
+            <mat-error *ngIf="f['surname'].errors && f['surname'].errors['required']">Surname is required.</mat-error>
+          </div>
+        </div>
+      </div>
+  
+  
+      <div class="row-fields-container">
+        <div class="mail-field-container">
+          <mat-form-field appearance="fill">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email" id="email" type="text">
+          </mat-form-field>
+          <div *ngIf="f['email'].touched && f['email'].invalid">
+            <mat-error *ngIf="f['email'].errors && f['email'].errors['required']">Email is required.</mat-error>
+            <mat-error *ngIf="f['email'].errors && f['email'].errors['email']">Please, enter valid email address.
+            </mat-error>
+          </div>
+        </div>
+      </div>
+  
+      <div class="row-fields-container">
+        <div class="field-container">
+          <mat-form-field appearance="fill">
+            <mat-label>Phone</mat-label>
+            <input matInput formControlName="phone" id="phone" type="phone" class="form-control">
+          </mat-form-field>
+        </div>
+        <div class="field-container">
+          <mat-form-field appearance="fill">
+            <mat-label>Gender</mat-label>
+            <mat-select formControlName="gender" id="gender" type="text" class="form-control">
+              <mat-option value=""></mat-option>
+              <mat-option value="male">Male</mat-option>
+              <mat-option value="female">Female</mat-option>
+              <mat-option value="transgender">Transgender</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <div *ngIf="f['gender'].touched && f['gender'].invalid">
+            <mat-error *ngIf="f['gender'].errors && f['gender'].errors['required']">Gender is required.</mat-error>
+          </div>
+        </div>
+      </div>
+  
+      <div class="row-fields-container">
+        <button mat-raised-button class="submitButton" color="primary" [disabled]="form.invalid" type="submit">INVIA</button>
+      </div>
+  
+    </form>
+  </div>
+
+  <div class="recap-info-container" *ngIf="formData">
+    <h2 class="form-title">Hai inserito:</h2>
+    <span class="form-data-text"><mat-icon>face</mat-icon> {{formData.name}} {{formData.surname}}</span>
+    <span class="form-data-text"><mat-icon>account_circle</mat-icon> {{formData.username}}</span>
+    <span class="form-data-text"><mat-icon>password</mat-icon> {{formData.password}}</span>
+    <span class="form-data-text"><mat-icon>email</mat-icon> {{formData.email}}</span>
+    <span class="form-data-text"><mat-icon>phone</mat-icon> {{formData.phone}}</span>
+    <span class="form-data-text"><mat-icon>{{formData.gender}}</mat-icon> {{formData.gender}}</span>
+  </div>
+
 </div>
-
-
 
 <router-outlet></router-outlet>
